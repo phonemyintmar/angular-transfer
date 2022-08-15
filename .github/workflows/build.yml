@@ -1,0 +1,27 @@
+name: Build Project
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Install
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Publish
+        run: |
+          git config --local user.name "Phone Myint Marr"
+          git config --local user.email "phonemyintmarr@gmail.com"
+          git checkout --orphan gh-pages
+          git add -f dist
+          git commit -m "[Bot] Build by Github Action"
+          git push -f origin gh-pages
