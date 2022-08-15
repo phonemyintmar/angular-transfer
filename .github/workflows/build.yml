@@ -19,6 +19,7 @@ jobs:
         run: npm run build
       - name: Publish
         run: |
+          cp dist/index.html dist/404.html
           mv dist docs
           git config --local user.name "Phone Myint Marr"
           git config --local user.email "phonemyintmarr@gmail.com"
